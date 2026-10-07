@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Remove Book</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f9fc;
+            color: #2c3e50;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-top: 6px solid #f8d7da; /* Pastel Red Accent */
+        }
+        .header-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #721c24;
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+            letter-spacing: -0.5px;
+        }
+        p {
+            color: #555555;
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+        .book-name-highlight {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        /* Dynamic Pastel Red Button */
+        .btn-red {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 5px rgba(248, 215, 218, 0.4);
+        }
+        .btn-red:hover {
+            background-color: #f5c6cb;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(248, 215, 218, 0.6);
+        }
+        .footer-links {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .footer-links a {
+            color: #666666;
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+            color: #333333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="header-title">Confirm Removal</h1>
+        
+        <p>Are you sure you want to remove <span class="book-name-highlight">"{{ book.name }}"</span>? This action cannot be undone.</p>
+
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn-red">Yes, Remove</button>
+        </form>
+
+        <div class="footer-links">
+            <a href="{% url 'book-detail' book.pk %}">&larr; Cancel and Go Back</a>
+        </div>
+    </div>
+</body>
+</html>

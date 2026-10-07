@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book List</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f9fc;
+            color: #2c3e50;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 650px;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-top: 6px solid #b4e197; /* Soft pastel green accent */
+        }
+        .header-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #333333;
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+            letter-spacing: -0.5px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 8px 14px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+            border: none;
+        }
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+        /* Pastel Green */
+        .btn-green {
+            background-color: #d4edda;
+            color: #155724;
+            box-shadow: 0 2px 5px rgba(212, 237, 218, 0.4);
+        }
+        .btn-green:hover {
+            background-color: #c3e6cb;
+        }
+        /* Pastel Blue */
+        .btn-blue {
+            background-color: #cce5ff;
+            color: #004085;
+            box-shadow: 0 2px 5px rgba(204, 229, 255, 0.4);
+        }
+        .btn-blue:hover {
+            background-color: #b8daff;
+        }
+        /* Pastel Red */
+        .btn-red {
+            background-color: #f8d7da;
+            color: #721c24;
+            box-shadow: 0 2px 5px rgba(248, 215, 218, 0.4);
+        }
+        .btn-red:hover {
+            background-color: #f5c6cb;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        /* Clickable Item Row Card */
+        li {
+            background-color: #fafbfc;
+            border: 1px solid #edf2f7;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease-in-out;
+        }
+        li:hover {
+            background-color: #f0f4f8;
+            border-color: #e2e8f0;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.03);
+        }
+        /* Clickable Book Name Link */
+        .book-link {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-grow: 1;
+        }
+        .book-link::before {
+            content: "📖";
+            font-size: 14px;
+        }
+        .actions {
+            display: flex;
+            gap: 8px;
+        }
+        .empty-text {
+            color: #888;
+            font-style: italic;
+            text-align: center;
+            padding: 20px 0;
+            background: none;
+            border: none;
+        }
+        .top-action {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="header-title">Book List</h1>
+        
+        <div class="top-action">
+            <a href="{% url 'book-create' %}" class="btn btn-green">+ Add New Book</a>
+        </div>
+        
+        <ul>
+            {% for book in books %}
+                <li>
+                    <!-- Clickable book name with a subtle icon and card hover effect -->
+                    <a href="{% url 'book-detail' book.pk %}" class="book-link">{{ book.name }}</a> 
+                    <div class="actions">
+                        <a href="{% url 'book-update' book.pk %}" class="btn btn-blue">Update</a> 
+                        <a href="{% url 'book-delete' book.pk %}" class="btn btn-red">Remove</a>
+                    </div>
+                </li>
+            {% empty %}
+                <li class="empty-text">No books available yet. Click "Add New Book" to get started!</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

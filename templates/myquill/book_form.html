@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if form.instance.pk %}Edit Book{% else %}Create Book{% endif %}</title>
+    <!-- Required for Quill widget styling and scripts to render correctly -->
+    {{ form.media }}
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f9fc;
+            color: #2c3e50;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 650px;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-top: 6px solid #b4e197; /* Soft pastel accent */
+        }
+        /* Great Header Styling */
+        .header-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #333333;
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+            letter-spacing: -0.5px;
+        }
+        form p {
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: 600;
+            font-size: 14px;
+            color: #555555;
+            display: block;
+            margin-bottom: 6px;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #dcdcdc;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+            background-color: #fafbfc;
+        }
+        input[type="text"]:focus {
+            border-color: #ffb6c1;
+            outline: none;
+            background-color: #fff;
+        }
+        /* Pastel Pink Dynamic Button */
+        .btn-pink {
+            background-color: #ffb6c1;
+            color: #5c3a41;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 5px rgba(255, 182, 193, 0.3);
+        }
+        .btn-pink:hover {
+            background-color: #ffa0b0;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(255, 182, 193, 0.5);
+        }
+        .footer-links {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .footer-links a {
+            color: #666666;
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+            color: #333333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Great Header Component -->
+        <h1 class="header-title">
+            {% if form.instance.pk %}Edit Book: {{ form.instance.name }}{% else %}Create New Book{% endif %}
+        </h1>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn-pink">Save Book</button>
+        </form>
+
+        <div class="footer-links">
+            <a href="{% url 'book-list' %}">&larr; Cancel and Return to List</a>
+        </div>
+    </div>
+</body>
+</html>
